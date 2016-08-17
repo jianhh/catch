@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="2.4" xmlns="http://java.sun.com/xml/ns/j2ee"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee 
+	http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd">
+
+	<welcome-file-list>
+		<welcome-file>index.jsp</welcome-file>
+	</welcome-file-list>
+	
+	<servlet>
+		<servlet-name>startup</servlet-name>
+		<servlet-class>
+			com.framework.config.MoStartupServlet
+		</servlet-class>
+		<init-param>
+			<param-name>systemName</param-name>
+			<param-value>weigou</param-value>
+		</init-param>
+		<init-param>
+			<param-name>siteName</param-name>
+			<param-value>S1</param-value>
+		</init-param>
+		<init-param>
+			<param-name>logConfig</param-name>
+			<param-value>/conf/log4j.xml</param-value>
+		</init-param>
+		<init-param>
+			<param-name>errmsg-config</param-name>
+			<param-value>/conf/error.properties</param-value>
+		</init-param>
+		<init-param>
+			<param-name>logRefresh</param-name>
+			<param-value>10</param-value>
+		</init-param>
+		<init-param>
+			<param-name>persistence-config</param-name>
+			<param-value>/conf/persistence.properties</param-value>
+		</init-param>
+		<init-param>
+			<param-name>start-config</param-name>
+			<param-value>/conf/start.properties</param-value>
+		</init-param>
+		<init-param>
+			<param-name>sql-config</param-name>
+			<param-value>/conf/sql.properties</param-value>
+		</init-param>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+
+	<servlet>
+		<servlet-name>DSPStartupServlet</servlet-name>
+		<servlet-class>
+			com.aspire.dps.config.DSPStartupServlet
+		</servlet-class>
+		<init-param>
+			<param-name>isDistribute</param-name>
+			<param-value>false</param-value>
+		</init-param>
+		<init-param>
+			<param-name>configPath</param-name>
+			<param-value>moxpps/conf/</param-value>
+		</init-param>
+		<load-on-startup>4</load-on-startup>
+	</servlet>
+
+	<servlet>
+		<servlet-name>t</servlet-name>
+		<servlet-class>
+			com.aspire.dps.master.MasterStrokeServlet
+		</servlet-class>
+		<init-param>
+			<param-name>tempate_path_class</param-name>
+			<param-value>
+				com.framework.tempate.DeviceTempatePath
+			</param-value>
+		</init-param>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>t</servlet-name>
+		<url-pattern>/t.do</url-pattern>
+	</servlet-mapping>
+
+  <filter>
+    <filter-name>LoginFilter</filter-name>
+    <filter-class>com.framework.config.LoginFilter</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>LoginFilter</filter-name>
+    <url-pattern>/*</url-pattern>
+  </filter-mapping>
+</web-app>

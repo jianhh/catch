@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="GB2312"?>
+<XMLSystemConfig>
+    <ModuleConfig Name="WebPortal" Id="4" Ref="subconf/config-WebPortal.xml" Description="Web Portal 配置项" />
+    <ModuleConfig Name="xcached" Id="17" Ref="subconf/config-XCached.xml" Description="缓存模块配置" />
+    <ModuleConfig Name="threadPoolConfig" Id="18" Ref="subconf/config-ThreadPool.xml" Description="线程池模块配置" />
+    <ModuleConfig Name="redis" Id="18" Ref="subconf/config-redis.xml" Description="Redis配置项" />
+</XMLSystemConfig>

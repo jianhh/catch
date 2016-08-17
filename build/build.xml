@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="GB2312"?>
+<!-- ====================================================================== -->
+<!--                                                                        -->
+<!--                       UCPPS, Build                                      -->
+<!--  This file used to deploy the xPortal and xTBS system                  -->
+<!--                                                                        -->
+<!-- ====================================================================== -->
+
+<!--       UCPPS make file 
+	Your should change the base dir of your local path
+-->
+<project name="Portal" default="war" basedir=".">
+	<description>MM UCPPS build file</description>
+
+	<!-- set global properties for this build -->
+	<!-- ====================================================================== -->
+	<!--                                                                        -->
+	<!--              Set the local  props                                   -->
+	<!--                                                                        -->
+	<!-- ====================================================================== -->
+	<property environment="env" />
+	<property name="BUILD_TARGET" value="moxpps" />
+	<property name="COMPONENT_SRC_PATH"
+		location="${env.COMPONENT_SRC_PATH}" />
+	<!--
+	<property name="COMMON_SRC_PATH" location="${env.COMMON_SRC_PATH}" />
+	-->
+	<property name="JAVAC_HOME" value="${env.JAVAC_HOME}" />
+	<property name="JBOSS_HOME" location="${env.JBOSS_HOME}" />
+	<!--if it's a patch publishment,input the patch file name,or input XXXX-->
+	<property name="PATCH_NUMBER_PATTERN" value="${env.PATCH_NUMBER}" />
+	<!--if it's a DB modify file,input the file name excluding postfix,or input XXXX for none-->
+	<property name="PATCH_NUMBER" value="${env.PATCH_NUMBER}" />
+
+	<!-- ===================================================================== -->
+	<!--                                                                        -->
+	<!-- Set props of this project                                              -->
+	<!--                                                                        -->
+	<!-- ====================================================================== -->
+	<property name="BasePath" location="." />
+
+	<property name="RELEASE_HOME" location="${env.RELEASE_HOME}" />
+
+	<property name="configPath" location="${RELEASE_HOME}/conf" />
+	<property name="dbscriptePath" location="${RELEASE_HOME}/db_script" />
+	<property name="appPath" location="${RELEASE_HOME}/app" />
+	<property name="tempPath" location="${RELEASE_HOME}/src" />
+	<property name="warFile" location="${RELEASE_HOME}/web.war" />
+
+
+
+
+	<path id="libClassPath">
+		<fileset dir="${appPath}/WEB-INF/lib">
+			<include name="*.jar" />
+			<include name="*.zip" />
+		</fileset>
+		<pathelement
+			location="${JBOSS_HOME}/server/all/lib/jboss-j2ee.jar" />
+		<pathelement location="${JBOSS_HOME}/server/all/lib/jboss.jar" />
+		<pathelement
+			location="${JBOSS_HOME}/server/all/lib/jboss-common-jdbc-wrapper.jar" />
+		<pathelement
+			location="${JBOSS_HOME}/server/all/lib/javax.servlet.jar" />
+		<pathelement
+			location="${JBOSS_HOME}/server/all/lib/javax.servlet.jsp.jar" />
+
+	</path>
+
+	<!--   Show the process status bar                -->
+	<target name="showslash" depends=""
+		description="Show the slash screen">
+		<echo>Current system is ${BUILD_TARGET}</echo>
+		<splash
+			imageurl="http://www.aspire-tech.com/cn/images/m_download_1.gif"
+			useproxy="true" showduration="3000" />
+	</target>
+
+	<target name="init" depends="">
+		<!-- Create the build directory structure used by compile -->
+		<mkdir dir="${RELEASE_HOME}" />
+		<mkdir dir="${configPath}" />
+		<mkdir dir="${dbscriptePath}" />
+		<mkdir dir="${appPath}" />
+		<mkdir dir="${appPath}/certificate" />
+		<mkdir dir="${appPath}/patch" />
+		<mkdir dir="${appPath}/WEB-INF" />
+		<mkdir dir="${appPath}/WEB-INF/lib" />
+		<mkdir dir="${appPath}/WEB-INF/classes" />
+		<mkdir dir="${tempPath}" />
+		<mkdir dir="${tempPath}/com" />
+
+	</target>
+	<target name="getjava" depends="init"
+		description="Get source file from cc">
+		<!-- Get xportal java files from vss -->
+		<echo>Get xportal java files</echo>
+		<copy todir="${tempPath}/com/aspire/">
+			<fileset dir="${COMPONENT_SRC_PATH}/src/com/aspire">
+				<include name="**/*.java" />
+				<include name="**/*.properties" />
+				<include name="**/*.xml" />
+			</fileset>
+		</copy>
+		<!--
+		<echo>Get common java files</echo>
+		<copy todir="${tempPath}/com/aspire/">
+			<fileset dir="${COMMON_SRC_PATH}/code/com/aspire">
+				<include name="**/*.java" />
+				<include name="**/*.properties" />
+				<include name="**/*.xml" />
+			</fileset>
+		</copy>
+		-->
+	</target>
+
+	<!-- Get all db_script from vss -->
+	<target name="getlib" depends="getjava"
+		description="Get source file from vss">
+
+		<echo>Copy own lib files</echo>
+		<copy todir="${appPath}/WEB-INF/lib">
+			<fileset dir="${COMPONENT_SRC_PATH}/lib" excludes="*.doc" />
+		</copy>
+
+		<echo>Get portal page files</echo>
+		<copydir src="${COMPONENT_SRC_PATH}/webapp/web"
+			dest="${appPath}" excludes="defaultSite/**" />
+
+		<!--
+		<echo>Copy common lib files</echo>
+		<copy todir="${appPath}/WEB-INF/lib">
+			<fileset dir="${COMMON_SRC_PATH}/lib" />
+		</copy>
+		-->
+	</target>
+
+	<target name="getapp" depends="getlib"
+		description="Get source file from vss">
+		<!-- Get system config files   -->
+		<echo>Get component config files</echo>
+		<copy todir="${configPath}">
+			<fileset dir="${COMPONENT_SRC_PATH}/config/web/newconf" />
+		</copy>
+
+		<echo>Get component config files</echo>
+		<copy todir="${configPath}">
+			<fileset dir="${COMPONENT_SRC_PATH}/config/web"
+				includes="*.*" />
+		</copy>
+
+		<echo>Get patch files</echo>
+		<native2ascii encoding="gbk"
+			src="${COMPONENT_SRC_PATH}/config/web/patch" dest="${appPath}/patch"
+			includes="*.*" />
+
+		<echo>Get db script files</echo>
+		<copy todir="${dbscriptePath}">
+			<fileset dir="${COMPONENT_SRC_PATH}/db_script"
+				includes="*.*" />
+		</copy>
+		<copy todir="${dbscriptePath}/modify">
+			<fileset dir="${COMPONENT_SRC_PATH}/db_script/modify"
+				includes="${PATCH_NUMBER_PATTERN}*.*" />
+		</copy>
+		
+		<!-- Get certificate files   -->
+		<echo>Get certificate files</echo>
+		<copy todir="${appPath}/certificate">
+			<fileset dir="${COMPONENT_SRC_PATH}/certificate"
+				includes="*.*" />
+		</copy>
+
+		<!-- Get defaultSite files   -->
+		<echo>Get moneditor</echo>
+		<copy todir="${RELEASE_HOME}/defaultSite">
+			<fileset dir="${COMPONENT_SRC_PATH}/webapp/web/defaultSite" />
+		</copy>
+
+	</target>
+
+
+
+	<target name="compile" depends="getapp"
+		description="compile all java code">
+		<javac srcdir="${tempPath}" debug="true" encoding="GBK"
+			destdir="${appPath}/WEB-INF/classes" verbose="no" fork="yes"
+			executable="${JAVAC_HOME}" memoryMaximumSize="512m">
+			<classpath refid="libClassPath" />
+		</javac>
+	</target>
+
+	<target name="updateTime">
+		<tstamp>
+			<format property="buildtime" pattern="yyyy-MM-dd HH:mm:ss" />
+		</tstamp>
+	</target>
+
+	<target name="war" depends="compile,updateTime"
+		description="Build the app war file,">
+		<jar destfile="${warFile}" basedir="${appPath}"
+			excludes="**/classes12.*" index="true" />
+		<echo>clean up all</echo>
+		<delete dir="${tempPath}" />
+		<delete dir="${appPath}" />
+	</target>
+
+	<target name="help">
+		<echo>ant getjava: get all java files from vss</echo>
+		<echo>ant compile: compile all java file"</echo>
+		<echo>ant getapp : get all page and config files form vss</echo>
+		<echo>ant war : build war file</echo>
+	</target>
+	<target name="h" depends="help" />
+</project>

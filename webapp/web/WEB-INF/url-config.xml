@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="GB2312"?>
+<UrlConfigRoot>
+	<UrlConfig id="flag" value="false" />
+
+	<UrlConfig id="fromUrl" value="odp.mmarket.com" />
+
+	<UrlConfig id="toUrl" value="odp.mmarket.com" />
+	
+	<UrlConfig id="reqOpenFlag" value="true" />
+ 
+</UrlConfigRoot>
+

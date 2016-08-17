@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-module
+  type="WEB"
+  name="weigou"
+  id="myeclipse.1341304617453"
+  context-root="/weigou"
+  j2ee-spec="5.0"
+  archive="weigou.war">
+  <attributes>
+    <attribute name="webrootdir" value="/webapp/web" />
+  </attributes>
+</project-module>
+

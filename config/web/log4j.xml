@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+<log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/"
+	threshold="debug">
+	<appender name="debug"
+		class="com.common.log.newproxy.BizTimeSizeRollingFileAppender">
+		<errorHandler
+			class="com.common.log.proxy.JLogErrorHandler">
+		</errorHandler>
+		<param name="File" value="/log/debug/debug.log" />
+		<param name="Encoding" value="GBK" />
+		<param name="MaxFileSize" value="100MB" />
+		<param name="DatePattern" value="'.'yyyy-MM-dd" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern"
+				value=" %d{ISO8601} [%c]- %m%n" />
+		</layout>
+		<filter class="org.apache.log4j.varia.LevelRangeFilter">
+			<param name="LevelMin" value="debug" />
+			<param name="LevelMax" value="debug" />
+			<param name="acceptOnMatch" value="true" />
+		</filter>
+	</appender>
+	<appender name="startup"
+		class="com.common.log.proxy.SimpleFileAppender">
+		<param name="File" value="StartErrorInfo.txt" />
+		<param name="Encoding" value="GBK" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value=" %d{ISO8601}- %m%n" />
+		</layout>
+	</appender>
+	<!--//@CheckItem@ REQ-yanfeng-20030821 add specific log for JDBC-->
+	<appender name="run"
+		class="com.common.log.newproxy.BizTimeSizeRollingFileAppender">
+		<errorHandler
+			class="com.common.log.proxy.JLogErrorHandler">
+		</errorHandler>
+		<param name="File" value="/log/run/run.log" />
+		<param name="DatePattern" value="'.'yyyy-MM-dd" />		
+		<param name="Encoding" value="GBK" />
+		<param name="MaxFileSize" value="100MB" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern"
+				value=" %d{ISO8601} [%c]- %m%n" />
+		</layout>
+		<filter class="org.apache.log4j.varia.LevelRangeFilter">
+			<param name="LevelMin" value="info" />
+			<param name="LevelMax" value="info" />
+			<param name="acceptOnMatch" value="true" />
+		</filter>
+	</appender>
+	<appender name="warn"
+		class="com.common.log.newproxy.BizTimeSizeRollingFileAppender">
+		<errorHandler
+			class="com.common.log.proxy.JLogErrorHandler">
+		</errorHandler>
+		<param name="File" value="/log/warn/warn.log" />
+		<param name="DatePattern" value="'.'yyyy-MM-dd" />
+		<param name="Encoding" value="GBK" />
+		<param name="MaxFileSize" value="100MB" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern"
+				value=" %d{ISO8601} [%c]- %m%n" />
+		</layout>
+		<filter class="org.apache.log4j.varia.LevelRangeFilter">
+			<param name="LevelMin" value="warn" />
+			<param name="LevelMax" value="warn" />
+			<param name="acceptOnMatch" value="true" />
+		</filter>
+	</appender>
+	<appender name="error"
+		class="com.common.log.newproxy.BizTimeSizeRollingFileAppender">
+		<errorHandler
+			class="com.common.log.proxy.JLogErrorHandler">
+		</errorHandler>
+		<param name="threshold" value="error" />
+		<param name="File" value="/log/error/error.log" />
+		<param name="DatePattern" value="'.'yyyy-MM-dd" />		
+		<param name="Encoding" value="GBK" />
+		<param name="MaxFileSize" value="200MB" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern"
+				value=" %d{ISO8601} [%c]- %m%n" />
+		</layout>
+	</appender>
+	<appender name="systemerror"
+		class="com.common.log.newproxy.BizTimeSizeRollingFileAppender">
+		<errorHandler
+			class="com.common.log.proxy.JLogErrorHandler">
+		</errorHandler>
+		<param name="threshold" value="error" />
+		<param name="File" value="/log/error/systemerror.log" />
+		<param name="DatePattern" value="'.'yyyy-MM-dd" />		
+		<param name="Encoding" value="GBK" />
+		<param name="MaxFileSize" value="100MB" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern"
+				value=" %d{ISO8601} [%c]- %m%n" />
+		</layout>
+	</appender>
+	<appender name="dps_log"
+		class="com.common.log.newproxy.BizTimeSizeRollingFileAppender">
+		<errorHandler
+			class="com.common.log.proxy.JLogErrorHandler">
+		</errorHandler>
+		<param name="File" value="/log/dps/dps.log" />
+		<param name="DatePattern" value="'.'yyyy-MM-dd" />
+		<param name="Encoding" value="GB2312" />		
+		<param name="MaxFileSize" value="100MB" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern"
+				value=" %d{ISO8601} [%c]- %m%n" />
+		</layout>
+	</appender>
+	<appender name="businesseslog"
+		class="com.common.log.newproxy.BizTimeSizeRollingFileAppender">
+		<errorHandler
+			class="com.common.log.proxy.JLogErrorHandler">
+		</errorHandler>
+		<param name="File" value="/log/businesses/businesses.log" />		
+		<param name="Encoding" value="GBK" />
+		<param name="MaxFileSize" value="20MB" />
+		<param name="DatePattern" value="'.'yyyyMMddHH" />
+		<param name="InstantCreatChkfile" value="true" />
+		<param name="stat_datepattern" value="'.'yyyyMMdd'.999999'" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%m%n" />
+		</layout>
+	</appender>
+	<appender name="commoditylog"
+		class="com.common.log.newproxy.BizTimeSizeRollingFileAppender">
+		<errorHandler
+			class="com.common.log.proxy.JLogErrorHandler">
+		</errorHandler>
+		<param name="File" value="/log/commodity/commodity.log" />		
+		<param name="Encoding" value="GBK" />
+		<param name="MaxFileSize" value="20MB" />
+		<param name="DatePattern" value="'.'yyyyMMddHH" />
+		<param name="InstantCreatChkfile" value="true" />
+		<param name="stat_datepattern" value="'.'yyyyMMdd'.999999'" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%m%n" />
+		</layout>
+	</appender>
+	<appender name="userloginlog"
+		class="com.common.log.newproxy.BizTimeSizeRollingFileAppender">
+		<errorHandler
+			class="com.common.log.proxy.JLogErrorHandler">
+		</errorHandler>
+		<param name="File" value="/log/userlogin/userlogin.log" />		
+		<param name="Encoding" value="GBK" />
+		<param name="MaxFileSize" value="20MB" />
+		<param name="DatePattern" value="'.'yyyyMMddHH" />
+		<param name="InstantCreatChkfile" value="true" />
+		<param name="stat_datepattern" value="'.'yyyyMMdd'.999999'" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%m%n" />
+		</layout>
+	</appender>
+	<appender name="interfacelog"
+		class="com.common.log.newproxy.BizTimeSizeRollingFileAppender">
+		<errorHandler
+			class="com.common.log.proxy.JLogErrorHandler">
+		</errorHandler>
+		<param name="File" value="/log/interface/interface.log" />		
+		<param name="Encoding" value="GBK" />
+		<param name="MaxFileSize" value="20MB" />
+		<param name="DatePattern" value="'.'yyyyMMddHH" />
+		<param name="InstantCreatChkfile" value="true" />
+		<param name="stat_datepattern" value="'.'yyyyMMdd'.999999'" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%m%n" />
+		</layout>
+	</appender>
+	<appender name="dbpoollog"
+		class="com.common.log.newproxy.BizTimeSizeRollingFileAppender">
+		<errorHandler
+			class="com.common.log.proxy.JLogErrorHandler">
+		</errorHandler>
+		<param name="File" value="/log/dbpool/dbpool.log" />		
+		<param name="Encoding" value="GBK" />
+		<param name="MaxFileSize" value="20MB" />
+		<param name="DatePattern" value="'.'yyyyMMddHH" />
+		<param name="InstantCreatChkfile" value="true" />
+		<param name="stat_datepattern" value="'.'yyyyMMdd'.999999'" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%m%n" />
+		</layout>
+	</appender>
+	
+	<logger name="com" additivity="false">
+		<level value="debug" />
+		<appender-ref ref="debug" />
+		<appender-ref ref="run" />
+		<appender-ref ref="warn" />
+		<appender-ref ref="error" />
+	</logger>
+	<logger name="com.dps" additivity="false">
+		<level value="debug" />
+		<appender-ref ref="dps_log" />
+	</logger>
+	<logger name="businesses.log" additivity="false">
+		<level value="info" />
+		<appender-ref ref="businesseslog" />
+	</logger>
+	<logger name="commodity.log" additivity="false">
+		<level value="info" />
+		<appender-ref ref="commoditylog" />
+	</logger>
+	<logger name="userlogin.log" additivity="false">
+		<level value="info" />
+		<appender-ref ref="userloginlog" />
+	</logger>
+	<logger name="interface.log" additivity="false">
+		<level value="info" />
+		<appender-ref ref="interfacelog" />
+	</logger>
+	<logger name="dbpool.log" additivity="false">
+		<level value="info" />
+		<appender-ref ref="dbpoollog" />
+	</logger>
+	<root>
+		<appender-ref ref="systemerror" />
+	</root>
+</log4j:configuration>

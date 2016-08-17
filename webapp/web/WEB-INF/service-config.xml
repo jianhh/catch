@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<service-config>
+  <service reqid="test" class="com.work.businesses.service.TestPhpService">
+  	<subservice class="com.work.businesses.service.TestPhpService1" sort="1" />
+  </service>
+  <service reqid="businesses_info" class="com.work.businesses.service.BusinessesInfoService"></service>
+  <service reqid="commodity" class="com.work.commodity.service.CommodityService"></service>
+  <service reqid="commodity_info" class="com.work.commodity.service.CommodityInfoService"></service>
+  <service reqid="commodity_merchants" class="com.work.commodity.service.CommodityMerchantsService"></service>
+  <service reqid="goods" class="com.work.commodity.service.GoodsService"></service>
+  <service reqid="goods_info" class="com.work.commodity.service.GoodsInfoService"></service>
+  <service reqid="goods_img" class="com.work.commodity.service.GoodsImgService"></service>
+  <service reqid="ali_user_login" class="com.work.commodity.service.AliUserLoginService"></service>
+  <service reqid="tb_user_login" class="com.work.commodity.service.TbUserLoginService"></service>
+  <service reqid="company_name" class="com.work.commodity.service.CompanyNameService"></service>
+  <service reqid="goods_new" class="com.work.commodity.service.GoodsNewService"></service>
+  <service reqid="uptoken" class="com.work.commodity.service.UploadTokenService"></service>
+  <service reqid="goods_category" class="com.work.commodity.service.GoodsCategoryService"></service>
+  <service reqid="company_url" class="com.work.commodity.service.CompanyUrlService"></service>
+  <service reqid="goods_info_filecheck" class="com.work.commodity.service.GoodsInfoFileCheckService"></service>
+    <service reqid="trade_number" class="com.work.commodity.service.CompanyNumberService"></service>
+  <service reqid="tb_goods" class="com.work.taobao.service.GoodsService"></service>
+  <service reqid="goodsByName" class="com.work.taobao.service.GoodsListByNameService"></service>
+  <service reqid="add_admin" class="com.work.admin.service.AddAdminService"></service>
+  <service reqid="supplier" class="com.work.admin.service.SupplierListService"></service>
+  <service reqid="trader" class="com.work.admin.service.TraderListService"></service>
+  <service reqid="add_shopAdmin" class="com.work.admin.service.AddShopAdminService"></service>
+  <service reqid="orderList" class="com.work.admin.service.OrderListService"></service>
+  <service reqid="chartWeekList" class="com.work.admin.service.ChartListService"></service>
+  <service reqid="shopChartList" class="com.work.admin.service.ShopChartListService"></service>
+  <service reqid="traderShoptList" class="com.work.admin.service.TraderShopListService"></service>
+  <service reqid="openChartList" class="com.work.admin.service.OpenChartListService"></service>
+  <service reqid="wxScan" class="com.work.admin.service.WxScanService"></service>
+  <service reqid="login" class="com.work.admin.service.AdminUserService"></service>
+  <service reqid="responseSuccess" class="com.work.admin.service.ResponseSuccessService"></service>
+  <service reqid="taobao_commodity" class="com.work.taobao.service.TaobaoCommodityService"></service>
+  <service reqid="taobao_goods_info" class="com.work.taobao.service.GoodsInfoService"></service>
+  <service reqid="ali_shop_check" class="com.work.commodity.service.AliShopCheckService"></service>
+  <service reqid="tb_shop_check" class="com.work.taobao.service.TbShopCheckService"></service>
+  <service reqid="tb_goods_new" class="com.work.taobao.service.GoodsNewService"></service>
+</service-config>
+

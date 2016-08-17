@@ -1,0 +1,10 @@
+eclipse.preferences.version=1
+encoding//config/web/persistence.properties=UTF-8
+encoding//developNotes/WG1.5.txt=UTF-8
+encoding//src/com/work/commodity/service/AliUserLoginService.java=UTF-8
+encoding//src/com/work/commodity/util/CommodityUtil.java=UTF-8
+encoding//src/com/work/commodity/util/GoodsUtil.java=UTF-8
+encoding//src/com/work/taobao/bo/CommodityBO.java=gbk
+encoding//src/com/work/taobao/util/GoodsUtil.java=UTF-8
+encoding//src/com/work/util/FotoMix.java=UTF-8
+encoding/<project>=gbk

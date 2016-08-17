@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<redisConfig>
+	<cluster name="UPGRADE">
+		<list>
+			<ip>10.101.10.41</ip>
+			<port>9215</port>
+		</list>
+		<list>
+			<ip>10.101.10.41</ip>
+			<port>9216</port>
+		</list>
+		<list>
+			<ip>10.101.10.41</ip>
+			<port>9218</port>
+		</list>
+		<list>
+			<ip>10.101.10.42</ip>
+			<port>9215</port>
+		</list>
+		<list>
+			<ip>10.101.10.42</ip>
+			<port>9216</port>
+		</list>
+		<list>
+			<ip>10.101.10.42</ip>
+			<port>9218</port>
+		</list>
+		<list>
+			<ip>10.101.10.43</ip>
+			<port>9215</port>
+		</list>
+		<list>
+			<ip>10.101.10.43</ip>
+			<port>9216</port>
+		</list>
+		<list>
+			<ip>10.101.10.43</ip>
+			<port>9218</port>
+		</list>
+		<list>
+			<ip>10.101.10.44</ip>
+			<port>9215</port>
+		</list>
+		<list>
+			<ip>10.101.10.44</ip>
+			<port>9216</port>
+		</list>
+		<list>
+			<ip>10.101.10.44</ip>
+			<port>9218</port>
+		</list>
+	</cluster>
+	<cluster name="APP">
+		<list>
+			<ip>10.101.10.41</ip>
+			<port>9211</port>
+		</list>
+	</cluster>
+	<cluster name="MUSIC">
+		<list>
+			<ip>10.101.10.41</ip>
+			<port>9211</port>
+		</list>
+	</cluster>
+	<cluster name="READ">
+		<list>
+			<ip>10.101.10.41</ip>
+			<port>9211</port>
+		</list>
+	</cluster>
+	<cluster name="VIDEO">
+		<list>
+			<ip>10.101.10.41</ip>
+			<port>9211</port>
+		</list>
+	</cluster>
+	<cluster name="COMIC">
+		<list>
+			<ip>10.101.10.41</ip>
+			<port>9211</port>
+		</list>
+	</cluster>
+	<cluster name="PAD">
+		<list>
+			<ip>10.101.10.41</ip>
+			<port>9211</port>
+		</list>
+	</cluster>
+	<cluster name="TDCATEGORY">
+		<list>
+			<ip>10.101.10.41</ip>
+			<port>9211</port>
+		</list>
+	</cluster>
+       <cluster name="BOOK">
+           <list>
+             <ip>10.101.10.41</ip>
+             <port>9211</port>
+           </list>
+        </cluster>
+</redisConfig>

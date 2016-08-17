@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="GB2312"?>
+<XMLSystemConfig>
+	<ModuleConfig Name="redis" Description="缓存模块配置">
+		<ConfigItem>
+			<Name>MAXACTIVE</Name>
+			<Id>0</Id>
+			<Description>MAXACTIVE配置</Description>
+			<Priority>0</Priority>
+			<EffectTime>1</EffectTime>
+			<Value>200</Value>
+			<Reserved />
+		</ConfigItem>
+		<ConfigItem>
+			<Name>MAXIDLE</Name>
+			<Id>0</Id>
+			<Description>MAXIDLE配置</Description>
+			<Priority>0</Priority>
+			<EffectTime>1</EffectTime>
+			<Value>200</Value>
+			<Reserved />
+		</ConfigItem>
+		<ConfigItem>
+			<Name>MAXWAIT</Name>
+			<Id>0</Id>
+			<Description>MAXWAIT配置</Description>
+			<Priority>0</Priority>
+			<EffectTime>1</EffectTime>
+			<Value>10000</Value>
+			<Reserved />
+		</ConfigItem>
+		<ConfigItem>
+			<Name>TIMEOUT</Name>
+			<Id>0</Id>
+			<Description>TIMEOUT配置</Description>
+			<Priority>0</Priority>
+			<EffectTime>1</EffectTime>
+			<Value>600000</Value>
+			<Reserved />
+		</ConfigItem>
+		<ConfigItem>
+			<Name>PASSWORD</Name>
+			<Id>0</Id>
+			<Description>PASSWORD配置</Description>
+			<Priority>0</Priority>
+			<EffectTime>1</EffectTime>
+			<Value>52f7fe4191ab</Value>
+			<Reserved />
+		</ConfigItem>
+		<ConfigItem>
+			<Name>isTestOnBorrow</Name>
+			<Id>0</Id>
+			<Description>isTestOnBorrow配置</Description>
+			<Priority>0</Priority>
+			<EffectTime>1</EffectTime>
+			<Value>true</Value>
+			<Reserved />
+		</ConfigItem>
+	</ModuleConfig>
+</XMLSystemConfig>

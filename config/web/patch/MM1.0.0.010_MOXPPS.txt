@@ -1,0 +1,6 @@
+PatchID=MM1.0.0.010_MOXPPS
+PatchName=MM1.0.0.010_MOXPPS
+UpdateTime=2010/10/18
+Description=新架构移植
+Amended=[none]
+Added=新架构移植

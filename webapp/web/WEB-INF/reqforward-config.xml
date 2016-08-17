@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<reqForward-config>
+  <req reqId="test">
+    <forward id="success" page="test" cacheType="max-age" cacheValue="28800" />
+  </req>
+  <req reqId="businesses_info">
+    <forward id="success" page="businessesInfo" cacheType="max-age" cacheValue="28800" />
+  </req>
+  <req reqId="goodsByName">
+    <forward id="success" page="goodsbyname" cacheType="max-age" cacheValue="28800" />
+  </req>
+  <req reqId="supplier">
+    <forward id="success" page="supplierlist" cacheType="max-age" cacheValue="28800" />
+  </req>
+  <req reqId="trader">
+    <forward id="success" page="traderlist" cacheType="max-age" cacheValue="28800" />
+  </req>
+  <req reqId="add_shopAdmin">
+    <forward id="success" page="traderlist" cacheType="max-age" cacheValue="28800" />
+  </req>
+   <req reqId="orderList">
+    <forward id="success" page="orderlist" cacheType="max-age" cacheValue="28800" />
+   </req>
+    <req reqId="wxScan">
+    <forward id="success" page="wxscanlist" cacheType="max-age" cacheValue="28800" />
+   </req>
+    <req reqId="login">
+    <forward id="success" page="login" cacheType="max-age" cacheValue="28800" />
+   </req>
+   
+</reqForward-config>
+

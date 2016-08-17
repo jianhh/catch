@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+	<head>
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+		<meta name="description" content="">
+		<meta name="author" content="">
+		<link rel="icon" href="../../favicon.ico">
+
+		<title>供应商查询页</title>
+
+		<link
+			href="http://cdn.bootcss.com/bootstrap/3.3.4/css/bootstrap.min.css"
+			rel="stylesheet">
+		<link href="signin.css" rel="stylesheet">
+		<script src="../../assets/js/ie-emulation-modes-warning.js"></script>
+		<script type="text/javascript" src="defaultSite/js/jquery-1.10.2.min.js"></script>
+		<script type="text/javascript" src="defaultSite/js/jquery-1.3.2.js"></script> 
+		<script type="text/javascript" src="defaultSite/js/jquery-calendar.js"></script> 
+		<link rel="stylesheet" type="text/css" href="defaultSite/css/jquery-calendar.css" /> 
+	    <link rel="stylesheet" href="defaultSite/css/styles.css" type="text/css"></link>
+	    <script type="text/javascript" src="defaultSite/js/responsive-nav.js"></script>
+	    </head>
+
+	<body>
+    <div id="nav" class="container" align="center">
+      <ul>
+        <li><a href="/weigou/defaultSite/template/addadmin.shtml">商务人员</a></li>
+        <li><a href="javascript:supplier();">供应商查询页</a></li>
+        <li><a href="javascript:trader();">分销商查询页</a></li>
+        <li><a href="javascript:order();">订单列表</a></li>
+      </ul>
+    </div>
+    <button id="nav-toggle">Menu</button>
+    <script>
+      var navigation = responsiveNav("#nav", {
+        customToggle: "#nav-toggle"
+      });
+    </script>
+		<div class="container">
+			<h2 class="form-signin-heading">
+				供应商查询页
+			</h2>
+		</div>
+		<!-- /container -->
+		<div class="container">
+			<form class="form-inline" method="post"
+				action="/weigou/t.do?requestid=supplier">
+				<div class="form-group">
+					<label for="exampleInputName2">
+						商务人员
+					</label>
+					<select class="form-control" id="name" name="name">
+						<option value="">
+							请选择
+						</option>
+						{if $name=="0"}
+						<option value="0" selected>
+							未绑定
+						</option>
+						{else}
+						<option value="0">
+							未绑定
+						</option>
+						{/if}
+						{foreach from=$adminlist item=admin name=list}
+						{if $name==$admin.n_id}
+						<option value="{$admin.n_id}" selected>
+							{$admin.c_name}
+						</option>
+						{else}
+						<option value="{$admin.n_id}">
+							{$admin.c_name}
+						</option>
+						{/if}
+						{/foreach}
+					</select>
+				</div>
+				<div class="form-group">
+					<label for="exampleInputName2">
+						店铺名称：
+					</label>
+					<input type="text" class="form-control" id="shopName"
+						name="shopName" placeholder="请输入店铺名称" value="{$shopName}">
+				</div>
+				<div class="form-group">
+					<label for="exampleInputEmail2">
+						订单情况：
+					</label>
+					<select class="form-control" id="orderState" name="orderState">
+					{if $orderState==0}
+						<option value="0" selected>
+							日增长
+						</option>
+						{else}
+						<option value="0">
+							日增长
+						</option>
+						{/if}
+						{if $orderState=="1"}
+						<option value="1" selected>
+							全部
+						</option>
+						{else}
+						<option value="1">
+							全部
+						</option>
+						{/if}
+					</select>
+				</div>
+				<div class="form-group">
+					<label for="exampleInputName2">
+						开始时间：
+					</label>
+					<input type="text" class="form-control" id="startTime" 
+						name="startTime" placeholder="请输入开始时间" value="{$startTime}" maxlength="16" onfocus="$(this).calendar()" readonly>
+				</div>
+				<div class="form-group">
+					<label for="exampleInputName2">
+						结束时间：
+					</label>
+					<input type="text" class="form-control" id="endTime" name="endTime" 
+						placeholder="请输入结束时间" value="{$endTime}" maxlength="16" onfocus="$(this).calendar()" readonly>
+				<button type="submit" class="btn btn-default">
+					查询
+				</button>
+				</div>
+			</form>
+		<br>
+		<hr>
+		<div class="container">
+		<table class="table table-responsive">
+			<tr><td><h5>总订单数:{$allOrder}</h5></td><td><h5>当日总付款订单数:{$allPayOrder}</h5></td><td><h5>当日总订单数:{$dayOrder}</h5></td><td><h5>当日总金额:{$dayMoney}(元)</h5></td><td><h5>总退款金额:{$dayRefundMoney}(元)</h5></td><td><h5>当日总退款订单数:{$dayRefundOrder}</h5></td></tr>
+		</table>
+		</div>
+		<hr>
+		<div class="table-responsive">
+		<table class="table table-responsive">
+			<tr>
+				<td>
+					店铺名称
+				</td>
+				<td>
+					昵称
+				</td>
+				<td>
+				   微信号
+				</td>
+				<td>
+					<a href="javascript:aa({$page},'11');">上新时间</a>
+				</td>
+				<td>
+					<a href="javascript:aa({$page},'10');">添加时间</a>
+				</td>
+				<td>
+					<a href="javascript:aa({$page},'1');">订单生成</a>
+				</td>
+				<td>
+					<a href="javascript:aa({$page},'2');">订单付款</a>
+				</td>
+				<td>
+					<a href="javascript:aa({$page},'3');">订单发货</a>
+				</td>
+				<td>
+					<a href="javascript:aa({$page},'4');">订单完成</a>
+				</td>
+				<td>
+					<a href="javascript:aa({$page},'5');">订单关闭</a>
+				</td>
+				<td>
+					<a href="javascript:aa({$page},'6');">订单</a>
+				</td>
+				<td>
+					<a href="javascript:aa({$page},'7');">粉丝</a>
+				</td>
+				<td>
+					<a href="javascript:aa({$page},'8');">分销商</a>
+				</td>
+				<td>
+					<a href="javascript:aa({$page},'9');">待审核分销商</a>
+				</td>
+			<!--	<td>
+					分销商周留存率
+				</td> --->
+				<td>
+					转换率
+				</td>
+				<td>
+					商务人员名称
+				</td>
+			</tr>
+			{foreach from=$supplierList item=supplier name=list}
+			<tr>
+				<td>
+					<a href="javascript:find({$supplier.shop_id},'{$supplier.shop_name}');">{$supplier.shop_name}</a>
+				</td>
+				{if $supplier.n_mobile!=null&&$supplier.n_phone==null}
+				<td>
+					{$supplier.nick_name} ( {$supplier.n_mobile})
+				</td>
+				{elseif $supplier.n_mobile!=null&&$supplier.n_phone!=null}
+				  <td>
+					{$supplier.nick_name}({$supplier.n_phone})
+				  </td>
+				{else}
+				   <td>
+					{$supplier.nick_name}
+				   </td>
+				{/if}
+				{if $supplier.wechat_name!=null}
+				<td>
+					{$supplier.wechat_name}
+				</td>
+				{else}
+				  <td>
+					&nbsp
+				   </td>
+				{/if}
+				<td>
+					{$supplier.create_time}
+				</td>
+				<td>
+					{$supplier.join_time}
+				</td>
+				<td>
+					{$supplier.order_generation}
+				</td>
+				<td>
+					{$supplier.order_pay}
+				</td>
+				<td>
+					{$supplier.order_delivery}
+				</td>
+				<td>
+					{$supplier.order_complete}
+				</td>
+				<td>
+					{$supplier.order_closed}
+				</td>
+				<td>
+					{$supplier.order_num}
+				</td>
+				{if $supplier.fans_num==null}
+				<td>
+					0
+				</td>
+				{else}
+				<td>
+					{$supplier.fans_num}
+				</td>
+				{/if}
+				<td>
+					{$supplier.trader_num}
+				</td>
+				<td>
+					{$supplier.examine_num}
+				</td>
+			<!--	<td>
+					{$supplier.f_retention}
+				</td> -->
+				<td>
+					{$supplier.conversion_rate}
+				</td>
+				<td width="8%" style="">
+					{if $supplier.admin_name==null}
+					<select class="form-control" id="admin_{$supplier.shop_id}"
+						name="admin" style="float:left;">
+						<option value="">
+							请选择
+						</option>
+						{foreach from=$adminlist item=admin name=list}
+						<option value="{$admin.n_id}">
+							{$admin.c_name}
+						</option>
+						{/foreach}
+					</select>
+					{else}{$supplier.admin_name}
+					{/if}
+				</td>
+				<td  width="7%">{if $supplier.admin_name==null}
+				<button type="submit" class="btn btn-default" onclick="add({$supplier.shop_id})" style="float:left;">添加</button>
+					
+					{/if}
+				</td>
+			</tr>
+			{/foreach}
+			<tr>
+				<td colspan="9" align="right">
+					<nav>
+					<ul class="pagination">
+						<li>
+							<a href="javascript:aa(1,'{$sort}');" aria-label="Previous">
+								<span aria-hidden="true">&laquo;</span> </a>
+						</li>
+						<li>
+							<a href="javascript:aa({$prevPageNo},'{$sort}');">上一页</a>
+						</li>
+						<li>
+							<a>{$page}</a>
+						</li>
+						<li>
+							<a href="javascript:aa({$nextPageNo},'{$sort}');">下一页</a>
+						</li>
+						<li>
+							<a href="javascript:aa({$totalPages},'{$sort}');" aria-label="Next">
+								<span aria-hidden="true">&raquo;</span> </a>
+						</li>
+						<li><a>共{$totalPages}页</a></li>
+                        <li><a>共{$totalRows}条</a></li>
+					</ul>
+					</nav>
+				</td>
+			</tr>
+		</table>
+		</div>
+		</div>
+			<input type="hidden" id="currentPageNo" value="{$page}"></input>
+			<input type="hidden" id="totalPages" value="{$totalPages}"></input>
+			<input type="hidden" id="totalRows" value="{$totalRows}"></input>
+		<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+		<script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
+		<script type="text/javascript">
+function aa(num,sort){
+  var name=document.getElementById("name").value;
+  var shopName=document.getElementById("shopName").value;
+  var orderState=document.getElementById("orderState").value;
+  var startTime=document.getElementById("startTime").value;
+  var endTime=document.getElementById("endTime").value;
+  var totalPages=document.getElementById("totalPages").value;
+  var totalRows=document.getElementById("totalRows").value;
+  if(num<1){
+   num=1;
+  }
+  if(num>totalPages){
+  num=totalPages;
+  }
+  var url="/weigou/t.do?requestid=supplier&name="+name+"&shopName="+shopName+"&orderState="+orderState+"&startTime="+startTime+"&endTime="+endTime+"&pageNo="+num+"&title="+sort+"&totalRows="+totalRows+"&totalPages="+totalPages+"&rnd="+Math.random();
+  url=encodeURI(encodeURI(url));
+  window.location.href=url;
+}
+function find(num,shopName){
+  var url="/weigou/t.do?requestid=trader&shopId="+num+"&supplierShopName="+shopName+"&rnd="+Math.random();
+  url=encodeURI(encodeURI(url));
+  window.location.href=url;
+}
+ function supplier(){
+  window.location.href="/weigou/t.do?requestid=supplier&rnd="+Math.random();
+}
+function trader(){
+  window.location.href="/weigou/t.do?requestid=trader&rnd="+Math.random();
+}
+function order(){
+  window.location.href="/weigou/t.do?requestid=orderList&rnd="+Math.random();
+}
+function add(num){
+                  var a="admin_"+num;
+                  var adminId=$('#'+a+' option:selected').val();
+                  var pageNo=document.getElementById("currentPageNo").value;
+                   $.ajax({
+                        url : '/weigou/t.do?requestid=add_shopAdmin',
+						data : {
+							adminId : adminId,
+							shopId:num
+						},
+						dataType : 'json',
+						type : 'post',
+						async : false,
+						beforeSend : function(xmlHttp) {
+							xmlHttp.setRequestHeader("If-Modified-Since", "0");
+							xmlHttp.setRequestHeader("Cache-Control",
+									"no-cache");
+						},
+						error : function() {
+						 alert("请选择商务人员");
+						 aa(pageNo,6);
+						},
+						success : function(data) {
+						 if(data=="3"){
+						 alert("成功");
+						}else if(data=="1"){
+						 alert("操作失败");
+						}else if(data="0"){
+						 alert("请选择商务人员");
+						}else{
+						 alert("网络异常");
+						}
+						aa(pageNo,6);
+						window.location.reload(); 	
+						}
+					});
+
+}
+</script>
+	</body>
+</html>

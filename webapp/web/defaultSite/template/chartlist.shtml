@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> 
+    <!--  <meta name="viewport" content="width=device-width, initial-scale=1"> -->
+    <meta name="viewport"  content="width=device-width, initial-scale=1,user-scalable=no">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../favicon.ico">
+
+    <title>图形列表</title>
+
+    <link href="http://cdn.bootcss.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
+    <link href="signin.css" rel="stylesheet">
+    <script src="../../assets/js/ie-emulation-modes-warning.js"></script>
+    
+    <script type="text/javascript" src="../js/jquery-1.10.2.min.js"></script>
+    <link rel="stylesheet" href="../css/styles.css" type="text/css"></link>
+	<script type="text/javascript" src="../js/responsive-nav.js"></script>
+	<script type="text/javascript" src="../js/highcharts.js"></script>  
+    </head>
+<script type="text/javascript">
+ $(function () {
+     var chart = new Highcharts.Chart({  
+            chart: {  
+                //将报表对象渲染到层上  
+            renderTo: 'container'  
+        },
+         title: {
+            text: '供应商/分销商周留存率',
+            x: -20 //center
+        },
+        subtitle: {
+            text: 'Source: Wegooooo.com',
+            x: -20
+        },
+        xAxis: {
+            categories: ['四周前', '三周前', '二周前', '一周前']
+        },
+        yAxis: {
+            title: {
+                text: '留存率百分比(%)'
+            },
+            plotLines: [{
+                value: 0,
+                width: 1,
+                color: '#808080'
+            }]
+        },
+        tooltip: {
+            valueSuffix: '°C'
+        },
+        plotOptions: {
+            line: {
+                dataLabels: {
+                    enabled: true
+                },
+                enableMouseTracking: false
+            }
+        },
+        legend: {
+            layout: 'vertical',
+            align: 'right',
+            verticalAlign: 'middle',
+            borderWidth: 0
+        },  
+                //设定报表对象的初始数据  
+        series: [{
+            name: '供应商',  
+            data: []          
+        },{
+            name: '分销商',
+            data: []
+            } 
+        ]  
+    }); 
+   
+        $(document).ready(function() {    
+         jQuery.getJSON('/weigou/t.do?requestid=chartWeekList', null, function(data) {  
+                //为图表设置值  
+                 chart.series[0].setData(data[0].data);
+                 chart.series[1].setData(data[1].data);
+                 chart.series[0].name=data[0].name;
+                 chart.series[1].name=data[1].name;  
+            });     
+        });   
+        
+        
+    
+});
+</script>
+  <body>
+  <form class="form-signin" >
+  <div id="nav" class="container" align="center">
+      <ul >
+        <li><a href="/weigou/defaultSite/template/addadmin.shtml">商务人员</a></li>
+        <li><a href="javascript:supplier();">供应商查询页</a></li>
+        <li><a href="javascript:trader();">分销商查询页</a></li>
+        <li><a href="javascript:order();">订单列表</a></li>
+      </ul>
+    </div>
+    </form>
+    <button id="nav-toggle">Menu</button>
+    <script>
+      var navigation = responsiveNav("#nav", {
+        customToggle: "#nav-toggle"
+      });
+    </script>
+       <script type="text/javascript">
+ function supplier(){
+  window.location.href="/weigou/t.do?requestid=supplier&rnd="+Math.random();
+}
+ function trader(){
+  window.location.href="/weigou/t.do?requestid=trader&rnd="+Math.random();
+}
+function order(){
+  window.location.href="/weigou/t.do?requestid=orderList&rnd="+Math.random();
+}
+function find(num){
+  var url="/weigou/t.do?requestid=orderList&shopId="+num+"&rnd="+Math.random();
+  url=encodeURI(encodeURI(url));
+  window.location.href=url;
+}
+</script>
+    <div class="container" id="container" style="min-width:400px;height:400px">
+    </div> <!-- /container -->
+
+
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
+  </body>
+</html>
